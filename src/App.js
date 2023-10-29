@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from 'react';
+import Joke from './components/Joke';
 function App() {
-  return (
+ const [text, setText] = useState('');
+    function getAscii(str){
+      return str.charCodeAt(0);
+    }
+
+ const handleChange = (e) => {
+    
+    let k = e.target.value;
+    let newvalue = "";
+    if (k === ""){
+      setText("");
+      return ;
+    }
+    for(let i = 0; i< k.length - 1 ; i++){
+      newvalue = newvalue + k[i];
+    }
+    var str =String.fromCharCode(getAscii(k[k.length - 1]) + 3);
+    console.log(str , newvalue);
+    newvalue = newvalue + str;
+    setText(newvalue);
+ };
+
+ return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{text}</h1>
+      <textarea value={text} onChange={handleChange} />
+      <h1>{text}</h1>
+      <Joke/>
     </div>
-  );
+ );
 }
 
 export default App;
