@@ -1,29 +1,61 @@
 import React, { useState } from 'react';
-
-const Encoder = () => {
+import TextEditor from './components/TextEditor';
+const App = () => {
  const [encodedText, setEncodedText] = useState('');
+ const [decodedText, setDecodedText] = useState('');
+ const [isEncoder, setIsEncoder] = useState(true);
+ const [count, setCount] = useState(0);
 
  const handleChange = (e) => {
-    let encodedText = '';
-
+    let encodedDecodedText = '';
+    const text = e.target.value;
+    setCount(text.length);
     for (let i = 0; i < e.target.value.length; i++) {
       let ascii = e.target.value.charCodeAt(i);
 
-      if (ascii >= 32) {
-        ascii += 3;
-        encodedText += String.fromCharCode(ascii);
+      if (isEncoder) {
+        if (ascii >= 32) {
+          ascii += 3;
+          encodedDecodedText += String.fromCharCode(ascii);
+        } else {
+          encodedDecodedText += e.target.value.charAt(i);
+        }
       } else {
-        encodedText += e.target.value.charAt(i);
+        if (ascii >= 35) {
+          ascii -= 3;
+          encodedDecodedText += String.fromCharCode(ascii);
+        } else {
+          encodedDecodedText += e.target.value.charAt(i);
+        }
       }
     }
 
-    setEncodedText(encodedText);
+    if (isEncoder) {
+      setEncodedText(encodedDecodedText);
+    } else {
+      setDecodedText(encodedDecodedText);
+    }
+ };
+
+ const handleSwitchMode = () => {
+    setIsEncoder(!isEncoder);
  };
 
  return (
     <div className='container'>
-      <textarea onChange={handleChange} />
-      <p>Encoded Text: {encodedText}</p>
+      <textarea  cols="50" rows="10" onChange={handleChange} />
+      {isEncoder ? (
+        <p>Encoded Text: {encodedText}</p>
+      ) : (
+        <p>Decoded Text: {decodedText}</p>
+      )}
+      <button onClick={handleSwitchMode}>
+        Switch to {isEncoder ? 'Decoder' : 'Encoder'}
+      </button>
+      <p> Characters {count}</p>
+      <TextEditor/>
     </div>
  );
 };
+export default App;
+
