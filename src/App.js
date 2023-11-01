@@ -1,36 +1,29 @@
 import React, { useState } from 'react';
-import Joke from './components/Joke';
-function App() {
- const [text, setText] = useState('');
-    function getAscii(str){
-      return str.charCodeAt(0);
-    }
+
+const Encoder = () => {
+ const [encodedText, setEncodedText] = useState('');
 
  const handleChange = (e) => {
-    
-    let k = e.target.value;
-    let newvalue = "";
-    if (k === ""){
-      setText("");
-      return ;
+    let encodedText = '';
+
+    for (let i = 0; i < e.target.value.length; i++) {
+      let ascii = e.target.value.charCodeAt(i);
+
+      if (ascii >= 32) {
+        ascii += 3;
+        encodedText += String.fromCharCode(ascii);
+      } else {
+        encodedText += e.target.value.charAt(i);
+      }
     }
-    for(let i = 0; i< k.length - 1 ; i++){
-      newvalue = newvalue + k[i];
-    }
-    var str =String.fromCharCode(getAscii(k[k.length - 1]) + 3);
-    console.log(str , newvalue);
-    newvalue = newvalue + str;
-    setText(newvalue);
+
+    setEncodedText(encodedText);
  };
 
  return (
-    <div className="App">
-      <h1>{text}</h1>
-      <textarea value={text} onChange={handleChange} />
-      <h1>{text}</h1>
-      <Joke/>
+    <div className='container'>
+      <textarea onChange={handleChange} />
+      <p>Encoded Text: {encodedText}</p>
     </div>
  );
-}
-
-export default App;
+};
