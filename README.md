@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Encoder 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The **Encoder React project** is a simple web application that allows users to encode typed text by shifting each character in the input text by +3 ASCII values. Additionally, the application provides word and character count statistics and lists all the typed words.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+## Features
 
-### `npm start`
+1. **Text Encoding:** Users can type or paste text into the input field, and the application will encode it by shifting each character's ASCII value by +3 positions. This encryption is based on the Caesar cipher with a fixed shift value of 3.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. **Word and Character Count:** The application displays the number of words and characters in the original TextArea.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **Word List:** The application lists all the words present in the original input text.
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To get started with the Encoder React project, follow these steps:
 
-### `npm run build`
+1. **Clone the Repository:** Start by cloning the project repository to your local machine using the following command:
+   ```shell
+   git clone https://github.com/kaydurgu/mid.git
+    ```
+2. **Install Dependencies:** Navigate to the project directory and install the necessary dependencies using npm or yarn:
+    ```shell
+    cd mid
+    npm install
+    ```
+3. **Run the Application:** Once the dependencies are installed, you can start the development server by running:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    ```shell
+    npm start
+    ```
+This will launch the application in your default web browser.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Usage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Real-time Text Encoding:**
 
-### `npm run eject`
+  - Type or paste the text you want to encode into the input field.
+  - As you type or paste text, the application will encode it in real-time without the need to click a separate button.
+  - The encoded text will be displayed in the output field in real-time as you input or paste new text.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **Word and Character Count:**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   - The application will display the number of words and characters in the original TextArea Component below the TextArea Component.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. **Word List:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   - All the words in the original input text will be listed in a separate section below the word and character count.
+     
+## Screenshots
 
-## Learn More
+Encoder         
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![Encoder Screenshot](https://github.com/kaydurgu/mid/blob/main/screens/all2.PNG) 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+Decoder
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![Decoder Screenshot](https://github.com/kaydurgu/mid/blob/main/screens/all4.PNG) 
 
-### Analyzing the Bundle Size
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+If you would like to contribute to the Encoder React project, please follow these guidelines:
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **Fork the repository.**
+2. **Create a new branch** for your feature or bug fix.
+3. **Make your changes** and test them thoroughly.
+4. **Submit a pull request** with a clear description of your changes.
