@@ -7,8 +7,7 @@ const TextArea = () => {
  const [decodedText, setDecodedText] = useState('');
  const [isEncoder, setIsEncoder] = useState(true);
  const [count, setCount] = useState(0);
- 
- const [wordCount, setWordCount] = useState(0);
+
  const [wordList, setWordList] = useState([]);
 
 
@@ -16,9 +15,8 @@ const TextArea = () => {
     let encodedDecodedText = '';
     const text = e.target.value;
     const words = e.target.value.split(' ');
-    const count = words.length;
+
     const list = [...new Set(words)].filter(word => word);
-    setWordCount(count);
     setWordList(list);
     setCount(text.length);
     for (let i = 0; i < e.target.value.length; i++) {
@@ -50,29 +48,58 @@ const TextArea = () => {
 
  const handleSwitchMode = () => {
     setIsEncoder(!isEncoder);
-    setWordCount(0);
     setCount(0);
+    setEncodedText("");
+    setDecodedText("");
     setWordList([]);
  };
 
  return (
-    <div className='container'>     
-    <div class="form-outline">
-    <textarea onChange={handleChange} class="form-control" id="textAreaExample1" rows="4"></textarea>
-    <label class="form-label" for="textAreaExample">Message</label>
-  </div>
-      {isEncoder ? (
-        <p>Encoded Text: {encodedText}</p>
-      ) : (
-        <p>Decoded Text: {decodedText}</p>
-      )}
-      <button type="button" className="btn btn-success" onClick={handleSwitchMode}>
-        Switch to {isEncoder ? 'Decoder' : 'Encoder'}
-      </button>
+    <div className='container'> 
+            <div class="container">
+                    <div class="row"> 
+                        <div class="col-5"> 
+                            <div class="form-outline">
+                                <textarea onChange={handleChange} value={decodedText} class="form-control" id="textAreaExample1" rows="5"></textarea>
+                                <label class="form-label" for="textAreaExample">Text</label>
+                            </div>
+                        </div>
+                        <div class="col-2 mx-auto ct"> 
+                        <button type="button" className="btn btn-success" onClick={handleSwitchMode}>
+                            Switch to {isEncoder ? 'Decoder' : 'Encoder'}
+                        </button>
+                        </div>
+                        <div class="col-5"> 
+                            <div class="form-outline">
+                            {isEncoder ? (
+                                <textarea class="form-control" id="textAreaExample1" rows="5"value={encodedText}></textarea>
+                            ) : (
+                                <textarea class="form-control" id="textAreaExample1" rows="5"value={decodedText}></textarea>
+                            )}  
+                                <label class="form-label" for="textAreaExample">Text</label>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+                        <table class="table">
+                            <caption>List of Words</caption>
+                            <thead>
+                                <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Characters Number</th>
+                                <th scope="col">Words Number</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <th scope="row">1</th>
+                                <td>{count}</td>
+                                <td>{wordList.length}</td>
+                                </tr>
+                            </tbody>
+                        </table>
       <WordTable words={wordList} />
-      <p> Characters {count}</p>
-      <p>Word Count: {wordCount}</p>
-      <p>Word List: {wordList.join(', ')}</p>
       <TextEditor/>
     </div>
  );
