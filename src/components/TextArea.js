@@ -60,7 +60,7 @@ const TextArea = () => {
                     <div class="row"> 
                         <div class="col-5"> 
                             <div class="form-outline">
-                                <textarea onChange={handleChange} value={decodedText} class="form-control" id="textAreaExample1" rows="5"></textarea>
+                                <textarea onChange={handleChange}  class="form-control" id="textAreaExample1" rows="5"></textarea>
                                 <label class="form-label" for="textAreaExample">Text</label>
                             </div>
                         </div>
