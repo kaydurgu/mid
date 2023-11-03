@@ -12,6 +12,7 @@ const TextEditor = () => {
  return (
     <div>
       <ReactQuill value={value} onChange={handleChange} />
+      <h1>{value}</h1>
     </div>
  );
 };
