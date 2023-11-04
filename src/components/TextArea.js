@@ -1,56 +1,59 @@
 import React, { useState } from 'react';
-import TextEditor from './TextEditor';
 import WordTable from './WordTable';
 
 const TextArea = () => {
- const [encodedText, setEncodedText] = useState('');
- const [decodedText, setDecodedText] = useState('');
+ const [encodedDecodedText, setEncodedDecodedText] = useState('');
+ const [text, setText] = useState('');
  const [isEncoder, setIsEncoder] = useState(true);
  const [count, setCount] = useState(0);
 
  const [wordList, setWordList] = useState([]);
 
 
+function encoder(text){
+    let result = "";
+  for (let i = 0; i < text.length; i++) {
+    let ascii = text.charCodeAt(i);
+    if (ascii >= 32) {
+        ascii += 3;
+        result += String.fromCharCode(ascii);
+    } 
+    else 
+        result += text.charAt(i);
+  }
+  return result;
+}
+function decoder(text){
+  let result = "";
+  for (let i = 0; i < text.length; i++) {
+    let ascii = text.charCodeAt(i);
+    if (ascii >= 35) {
+      ascii -= 3;
+      result += String.fromCharCode(ascii);
+    } 
+    else 
+      result += text.charAt(i);
+  }
+  return result;
+}
+
  const handleChange = (e) => {
-    let encodedDecodedText = '';
-    const text = e.target.value;
+    const content = e.target.value;
     const words = e.target.value.split(' ');
 
     const list = [...new Set(words)].filter(word => word);
     setWordList(list);
     setCount(text.length);
-    for (let i = 0; i < e.target.value.length; i++) {
-      let ascii = e.target.value.charCodeAt(i);
-
-      if (isEncoder) {
-        if (ascii >= 32) {
-          ascii += 3;
-          encodedDecodedText += String.fromCharCode(ascii);
-        } else {
-          encodedDecodedText += e.target.value.charAt(i);
-        }
-      } else {
-        if (ascii >= 35) {
-          ascii -= 3;
-          encodedDecodedText += String.fromCharCode(ascii);
-        } else {
-          encodedDecodedText += e.target.value.charAt(i);
-        }
-      }
-    }
-
-    if (isEncoder) {
-      setEncodedText(encodedDecodedText);
-    } else {
-      setDecodedText(encodedDecodedText);
-    }
+    setText(content);
+    if(isEncoder) setEncodedDecodedText(encoder(content));
+    else setEncodedDecodedText(decoder(content));
  };
 
  const handleSwitchMode = () => {
     setIsEncoder(!isEncoder);
-    setCount(0);
-    setEncodedText("");
-    setDecodedText("");
+    if (isEncoder)
+    setText(encodedDecodedText);
+    setEncodedDecodedText(text);
     setWordList([]);
  };
 
@@ -59,8 +62,14 @@ const TextArea = () => {
             <div class="container">
                     <div class="row"> 
                         <div class="col-5"> 
+                          
                             <div class="form-outline">
-                                <textarea onChange={handleChange}  class="form-control" id="textAreaExample1" rows="5"></textarea>
+                              {isEncoder ? (
+                                  <p>Decoded</p>
+                              ) : (
+                                <p>Encoded</p>
+                              )}  
+                                <textarea onChange={handleChange} value={text} class="form-control" id="textAreaExample1" rows="5"></textarea>
                                 <label class="form-label" for="textAreaExample">Text</label>
                             </div>
                         </div>
@@ -72,10 +81,11 @@ const TextArea = () => {
                         <div class="col-5"> 
                             <div class="form-outline">
                             {isEncoder ? (
-                                <textarea class="form-control" id="textAreaExample1" rows="5"value={encodedText}></textarea>
-                            ) : (
-                                <textarea class="form-control" id="textAreaExample1" rows="5"value={decodedText}></textarea>
-                            )}  
+                                  <p>Encoded</p>
+                              ) : (
+                                <p>Decoded</p>
+                              )}  
+                                <textarea class="form-control" id="textAreaExample1" rows="5"value={encodedDecodedText}></textarea>
                                 <label class="form-label" for="textAreaExample">Text</label>
                             </div>
                         </div>
@@ -100,7 +110,6 @@ const TextArea = () => {
                             </tbody>
                         </table>
       <WordTable words={wordList} />
-      <TextEditor/>
     </div>
  );
 };
